@@ -5,7 +5,7 @@ function NavBar () {
     const linkStyles = {
         display: "inline-block",
         width: "60px",
-        padding: "30px",
+        padding: "20px",
         background: "black",
         color: "white",
         position: "sticky"
@@ -13,17 +13,19 @@ function NavBar () {
       
     return (
     <div className="navbar">
-        NAVBAR
-        
-        {/* <NavLink style={linkStyles} to="/travelers"> 
+        NAVBAR <br></br>
+        <NavLink style={linkStyles} to="/">
+            Home
+        </NavLink> |{" "}
+        <NavLink style={linkStyles} to="/travelers"> 
             Travelers
-        </NavLink>
+        </NavLink> |{" "}
         <NavLink style={linkStyles} to="/trips">
             Trips
-        </NavLink>
+        </NavLink> |{" "}
         <NavLink style={linkStyles} to="/signin">
             Sign In
-        </NavLink> */}
+        </NavLink>
 
     </div>
     )
