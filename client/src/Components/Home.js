@@ -6,15 +6,13 @@ function Home () {
       <div>
         <NavBar />
         <h1>
-          Welcome to Trip Manager!
+          Trip Manager
         </h1>
+        <h3>
+          ~for all your trip planning needs~
+        </h3>
         <LeafMap />
-        <img
-          src="../images/home.jpg"
-          width="1100"
-          height="550"
-          alt="Beautiful lake as home page"
-        />
+        
       </div>
     );
   }

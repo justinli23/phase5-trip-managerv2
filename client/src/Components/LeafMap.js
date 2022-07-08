@@ -3,13 +3,13 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 function LeafMap() {
   return (
     <div>
-      <h1>LeafMap</h1>
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+      Where to today?
+      <MapContainer center={[43.8041, -120.5542]} zoom={6} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        <Marker position={[43.8041, -120.5542]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>

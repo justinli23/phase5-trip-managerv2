@@ -8,22 +8,20 @@ function NavBar () {
         padding: "20px",
         background: "black",
         color: "white",
-        position: "sticky"
       };
       
     return (
     <div className="navbar">
-        NAVBAR <br></br>
-        <NavLink style={linkStyles} to="/">
+        <NavLink  to="/">
             Home
-        </NavLink> |{" "}
-        <NavLink style={linkStyles} to="/travelers"> 
+        </NavLink>
+        <NavLink  to="/travelers"> 
             Travelers
-        </NavLink> |{" "}
-        <NavLink style={linkStyles} to="/trips">
+        </NavLink>
+        <NavLink  to="/trips">
             Trips
-        </NavLink> |{" "}
-        <NavLink style={linkStyles} to="/signin">
+        </NavLink>
+        <NavLink  to="/signin">
             Sign In
         </NavLink>
 
