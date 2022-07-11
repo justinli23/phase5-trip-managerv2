@@ -1,4 +1,4 @@
 class Location < ApplicationRecord
-    has_many :trip
-    has_many :activity
+    has_many :trips
+    has_many :activities
 end

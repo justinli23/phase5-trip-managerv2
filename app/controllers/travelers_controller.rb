@@ -32,6 +32,6 @@ class TravelersController < ApplicationController
     end
 
     def traveler_params
-        params.permit(:name, :birthdate, :email, :notes)
+        params.permit(:name, :birthdate, :email, :phone, :notes, :image)
     end
 end

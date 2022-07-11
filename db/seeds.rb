@@ -26,6 +26,8 @@ puts "🌱 Seeding 10 Travelers... "
         name: Faker::Name.name,
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65),
         email: Faker::Internet.email,
+        phone: Faker::PhoneNumber.cell_phone,
+        image: "https://icds.ee/wp-content/uploads/2018/05/default-author.png"
 )}
 
 puts "🌱 Seeding 5 Trips... "

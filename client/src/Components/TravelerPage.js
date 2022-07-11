@@ -14,20 +14,24 @@ function TravelerPage () {
     })
   }, [])
 
-  return (
-    <div>
-      <NavBar />
-      <TravelerForm />
-      {travelers.map(traveler => {
-        return <TravelerCard 
-        key={traveler.id}
-        name={traveler.name}
-        birthdate={traveler.birthdate}
-        email={traveler.email}
-        />
-      })} 
-    </div>
-  );
-}
+    return (
+      <div>
+        <NavBar />
+        <TravelerForm travelers={travelers}
+        setTravelers={setTravelers}/>
+        {travelers.map(traveler => {
+          return <TravelerCard 
+          key={traveler.id}
+          id={traveler.id}
+          name={traveler.name}
+          birthdate={traveler.birthdate}
+          email={traveler.email}
+          phone={traveler.phone}
+          image={traveler.image}
+          />
+        })} 
+      </div>
+    );
+  }
 
 export default TravelerPage;
