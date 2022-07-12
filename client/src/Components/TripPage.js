@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import TripCard from "./TripCard"
 import TripForm from "./TripForm"
-import NavBar from "./NavBar";
 
 function TripPage () {
   
@@ -17,7 +16,6 @@ function TripPage () {
 
   return (
       <div>
-        <NavBar />
         <TripForm trips={trips} setTrips={setTrips}/>
         {trips.map(trip => {
           return <TripCard 

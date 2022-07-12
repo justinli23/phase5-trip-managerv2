@@ -1,8 +1,7 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import NavBar from "./NavBar"
 
-function TravelerDetails () {
+function TravelerDetails ( {isAdmin} ) {
 
     const { id } = useParams()
     const [traveler, setTraveler] = useState({})
@@ -76,7 +75,6 @@ function TravelerDetails () {
     if (traveler.name) {
     return (
         <div>
-            <NavBar />
             <img src={traveler.image}
             alt="Traveler"
             width="200"
@@ -97,8 +95,12 @@ function TravelerDetails () {
                     <button type="submit">UPDATE</button>
                 </form>
                 {/*DELETE*/}
-                <button onClick={handleDelete}>DELETE TRAVELER</button>
-                (Caution: This action is irreversible) <br></br>
+                {isAdmin ? 
+                <div>
+                    <button onClick={handleDelete}>DELETE TRAVELER</button>
+                    (Caution: This action is irreversible) <br></br>
+                </div>
+                : null}
                 <a href="/travelers">Return to All Travelers</a>
             </div>
 
@@ -107,8 +109,7 @@ function TravelerDetails () {
     }
 
     return (
-        <div>
-            <NavBar />
+        <div>    
             Sorry, that traveler doesn't seem to exist anymore!
             <br></br>
             <a href="/travelers">Return to All Travelers</a>

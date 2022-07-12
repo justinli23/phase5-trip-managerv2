@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-
+    before_action :is_admin, only: [:destroy]
     def index
         render json: Trip.all
     end

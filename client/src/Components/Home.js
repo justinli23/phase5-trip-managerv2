@@ -1,13 +1,9 @@
 import LeafMap from "./LeafMap";
-import NavBar from "./NavBar"
 
-function Home () {
+function Home ( ) {
     return (
       <div>
-        <NavBar />
-        <h1>
-          Trip Manager
-        </h1>
+        <h1> Trip Manager </h1>
         <h3>
           ~for all your trip planning needs~
         </h3>

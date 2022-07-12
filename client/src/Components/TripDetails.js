@@ -1,14 +1,14 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import NavBar from "./NavBar";
 import TravelerCard from "./TravelerCard";
 
-function TripDetails() {
+function TripDetails( {isAdmin} ) {
   const { id } = useParams();
   const [trip, setTrip] = useState({});
-  const [activity, setActivity] = useState({});
+  const [activity, setActivity] = useState("");
   const [travelers, setTravelers] = useState({});
   const [qtraveler, setQtraveler] = useState("")
+  const [activities, setActivities] = useState([])
 
   function handleDelete() {
     fetch(`/trips/${id}`, {
@@ -24,27 +24,33 @@ function TripDetails() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const activity_obj = {
+      "name": activity,
+      "location_id": trip.location.id
+    }
     fetch("/activities", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: activity,
-        location_id: trip.location.id,
-      }),
+      body: JSON.stringify(activity_obj),
     })
-      .then((resp) => resp.json())
-      .then(window.location.reload());
+    .then((resp) => {
+      if (resp.ok) {
+        resp.json()
+        .then(
+          setActivities([...activities, activity_obj])
+      )};
+    })
   }
+  
 
   function handleQtraveler (e) {
     setQtraveler(e.target.value)
   }
 
   function handleNewAssignment (e) {
-    e.preventDefault()
-    
+    e.preventDefault()    
     const traveler = travelers.filter(traveler=> traveler.name.includes(qtraveler) ? traveler.id : null)[0]
     console.log(traveler.id)
     fetch('/trip_travelers', {
@@ -64,7 +70,10 @@ function TripDetails() {
   useEffect(() => {
     fetch(`/trips/${id}`)
       .then((resp) => resp.json())
-      .then((trip) => setTrip(trip))
+      .then((trip) => {
+        setTrip(trip)
+        setActivities(trip.activities)
+      })
       .then(
         fetch(`/travelers`)
           .then((r) => r.json())
@@ -75,11 +84,11 @@ function TripDetails() {
   if (trip.name) {
     return (
       <div>
-        <NavBar />
 
         {/* TRIP OVERVIEW */}
         <div>
           <img src={trip.image} alt="Trip" width="200" />
+
           <h2>
             {trip.name} | {trip.location.name}
           </h2>
@@ -88,10 +97,11 @@ function TripDetails() {
           </h3>
         </div>
 
-        {/* LOCATION DETAILS */}
-        <h2>Notable activities/restaurants for {trip.location.name}:</h2>
-        {trip.activities.map((activity) => (
-          <h4 key={activity.id}>{activity.name}</h4>
+        {/* ACTIVITY DETAILS */}
+        <h2>Things to Do/See in {trip.location.name}:</h2>
+        
+        {activities.map(activity => (
+          <h4 key={activity.id}> {activity.name} </h4>
         ))}
 
         <form onSubmit={handleSubmit}>
@@ -100,6 +110,7 @@ function TripDetails() {
             name="activity"
             value={activity}
             onChange={handleActivity}
+            placeholder="Found a new activity?"
           />
           <button type="submit">Add Activity</button>
         </form>
@@ -129,8 +140,12 @@ function TripDetails() {
 
         <div>
           {/*DELETE*/}
-          <button onClick={handleDelete}>DELETE TRIP</button>
-          (Caution: This action is irreversible) <br></br>
+          {isAdmin ?
+            <div>
+              <button onClick={handleDelete}>DELETE TRIP</button>
+              (Caution: This action is irreversible) <br></br>
+            </div>
+          : null}
           <a href="/trips">Return to All Trips</a>
         </div>
       </div>
@@ -139,7 +154,6 @@ function TripDetails() {
 
   return (
     <div>
-      <NavBar />
       Sorry, that trip doesn't seem to exist anymore! <br></br>
       <a href="/trips">Return to All Trips</a>
     </div>

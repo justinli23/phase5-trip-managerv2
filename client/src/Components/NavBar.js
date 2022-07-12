@@ -1,15 +1,17 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-function NavBar () {
-    const linkStyles = {
-        display: "inline-block",
-        width: "60px",
-        padding: "20px",
-        background: "black",
-        color: "white",
-      };
-      
+function NavBar ( {user, isAuth, isAdmin} ) {
+    // const linkStyles = {
+    //     display: "inline-block",
+    //     width: "60px",
+    //     padding: "20px",
+    //     background: "black",
+    //     color: "white",
+    //   };
+    console.log({user})
+    console.log({isAdmin})
+    console.log({isAuth})
     return (
     <div className="navbar">
         <NavLink  to="/">
@@ -22,9 +24,8 @@ function NavBar () {
             Trips
         </NavLink>
         <NavLink  to="/signin">
-            Sign In
+            {isAuth ? "Welcome, " + user.name : "Sign In"}
         </NavLink>
-
     </div>
     )
 }

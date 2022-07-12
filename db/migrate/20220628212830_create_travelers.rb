@@ -7,6 +7,7 @@ class CreateTravelers < ActiveRecord::Migration[6.1]
       t.string :notes
       t.string :phone
       t.string :image
+      t.integer :user_id
     
       t.timestamps
     end

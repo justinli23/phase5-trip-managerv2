@@ -6,7 +6,6 @@ function TripForm ( {setTrips, trips} ) {
   const [enddate, setEnddate] = useState("")
   const [image, setImage] = useState("")
   const [newLocation, setNewLocation] = useState("")
-  const [locations, setLocations] = useState([])
 
   function handleName (e) {
     setName(e.target.value)

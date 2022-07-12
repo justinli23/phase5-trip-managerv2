@@ -1,5 +1,5 @@
 class TravelersController < ApplicationController
-
+    before_action :is_admin, only: [:destroy]
     def index
         render json: Traveler.all
     end
@@ -32,6 +32,6 @@ class TravelersController < ApplicationController
     end
 
     def traveler_params
-        params.permit(:name, :birthdate, :email, :phone, :notes, :image)
+        params.permit(:name, :birthdate, :email, :phone, :image, :user_id)
     end
 end

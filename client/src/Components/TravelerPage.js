@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import TravelerCard from "./TravelerCard"
 import TravelerForm from "./TravelerForm"
-import NavBar from "./NavBar";
 
-function TravelerPage () {
+function TravelerPage ({user}) {
   const [travelers, setTravelers] = useState([])
 
   useEffect(() => {
@@ -16,9 +15,9 @@ function TravelerPage () {
 
     return (
       <div>
-        <NavBar />
         <TravelerForm travelers={travelers}
-        setTravelers={setTravelers}/>
+        setTravelers={setTravelers}
+        user={user}/>
         {travelers.map(traveler => {
           return <TravelerCard 
           key={traveler.id}

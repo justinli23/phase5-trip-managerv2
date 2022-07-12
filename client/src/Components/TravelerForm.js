@@ -1,11 +1,12 @@
 import {useState} from "react"
 
-function TravelerForm ( {setTravelers, travelers} ) {
+function TravelerForm ( {setTravelers, travelers, user} ) {
   const [name, setName] = useState("")
   const [birthdate, setBirthdate] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [image, setImage] = useState("")
+  const [error, setError] = useState(null)
 
   function handleName (e) {
     setName(e.target.value)
@@ -29,25 +30,32 @@ function TravelerForm ( {setTravelers, travelers} ) {
 
   function handleSubmit (e) {
     e.preventDefault()
-    fetch("/travelers", {
-      method: "POST",
-      headers: {
-        "Content-Type": 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        birthdate,
-        email,
-        phone,
-        image
-    })
-    })
-    .then(resp=>resp.json())
-    .then(newTraveler => {
-      console.log(newTraveler)
-      setTravelers([...travelers, newTraveler])
-      alert("Traveler added!")
-    })
+    if (user) {
+      fetch("/travelers", {
+        method: "POST",
+        headers: {
+          "Content-Type": 'application/json',
+        },
+        body: JSON.stringify({
+          "name": name,
+          "birthdate": birthdate,
+          "email": email,
+          "phone": phone,
+          "image": image,
+          "user_id": user.id
+      })
+      })
+      .then(resp=>resp.json())
+      .then(newTraveler => {
+        console.log(newTraveler)
+        setError(null)
+        setTravelers([...travelers, newTraveler])
+        alert("Traveler added!")
+      })
+    } else {
+      setError("You must be logged in to create a traveler!")
+    }
+
   }
 
 
@@ -62,6 +70,7 @@ function TravelerForm ( {setTravelers, travelers} ) {
           Image: <input type="text" name="image" value={image} onChange={handleImage} />
           <button type="submit">Add Traveler</button>
         </form>
+        {error ? <div>{error}</div> : null}
       </div>
     );
 }
