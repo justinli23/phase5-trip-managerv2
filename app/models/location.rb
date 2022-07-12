@@ -5,4 +5,8 @@ class Location < ApplicationRecord
     validates :name, presence: true
     validates :name, uniqueness: true
     validates :longitude, uniqueness: {scope: :latitude, message: "This location already exists."}
+
+    def first_trip
+        self.trips.first
+    end
 end
